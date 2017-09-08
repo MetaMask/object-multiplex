@@ -1,5 +1,7 @@
 # obj-multiplex
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/kumavis/obj-multiplex.svg)](https://greenkeeper.io/)
+
 simple stream multiplexing for `objectMode`
 
 ### usage
