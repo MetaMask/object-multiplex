@@ -14,7 +14,7 @@
     "readable-stream": "^2.3.3"
   },
   "devDependencies": {
-    "pump": "^1.0.2",
+    "pump": "^2.0.0",
     "tape": "^4.8.0"
   }
 }
