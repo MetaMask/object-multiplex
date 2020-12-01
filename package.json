@@ -2,19 +2,33 @@
   "name": "obj-multiplex",
   "version": "1.0.2",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "node test"
+    "build": "tsc --project .",
+    "lint": "eslint . --ext ts,js,json",
+    "lint:fix": "yarn lint --fix",
+    "test": "yarn build && node test"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "end-of-stream": "^1.4.0",
+    "end-of-stream": "^1.4.4",
     "once": "^1.4.0",
     "readable-stream": "^2.3.3"
   },
   "devDependencies": {
+    "@metamask/eslint-config": "^4.1.0",
+    "@types/end-of-stream": "^1.4.0",
+    "@types/node": "^14.14.9",
+    "@types/once": "^1.4.0",
+    "@typescript-eslint/eslint-plugin": "^4.8.2",
+    "@typescript-eslint/parser": "^4.8.2",
+    "eslint": "^7.14.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-json": "^2.1.2",
+    "eslint-plugin-node": "^11.1.0",
     "pump": "^1.0.2",
-    "tape": "^4.8.0"
+    "tape": "^4.8.0",
+    "typescript": "^4.1.2"
   }
 }
