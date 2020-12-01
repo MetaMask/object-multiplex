@@ -1,5 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable node/no-unpublished-require */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 const test = require('tape');
 const pump = require('pump');
 const { PassThrough, Transform } = require('readable-stream');

@@ -1,4 +1,4 @@
-import { Duplex } from 'stream';
+import { Duplex } from 'readable-stream';
 import eos from 'end-of-stream';
 import once from 'once';
 import { Substream } from './Substream';
