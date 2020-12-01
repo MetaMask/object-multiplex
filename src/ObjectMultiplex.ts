@@ -33,7 +33,7 @@ export class ObjectMultiplex extends Duplex {
 
     // listen for parent stream to end
     anyStreamEnd(this, (_error?: Error | null) => {
-      return substream.destroy();
+      substream.destroy();
     });
 
     return substream;
