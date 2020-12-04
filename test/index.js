@@ -1,6 +1,3 @@
-/* eslint-disable node/no-unpublished-require */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 const test = require('tape');
 const pump = require('pump');
 const { PassThrough, Transform } = require('readable-stream');
@@ -11,8 +8,7 @@ test('basic - string', (t) => {
   t.plan(2);
 
   const {
-    inTransport, outTransport,
-    inMux, outMux,
+    inTransport,
     inStream, outStream,
   } = basicTestSetup();
   bufferToEnd(outStream, (err, results) => {
@@ -33,8 +29,7 @@ test('basic - obj', (t) => {
   t.plan(2);
 
   const {
-    inTransport, outTransport,
-    inMux, outMux,
+    inTransport,
     inStream, outStream,
   } = basicTestSetup();
   bufferToEnd(outStream, (err, results) => {
@@ -54,13 +49,12 @@ test('roundtrip', (t) => {
   t.plan(2);
 
   const {
-    inTransport, outTransport,
-    inMux, outMux,
+    outTransport,
     inStream, outStream,
   } = basicTestSetup();
   const doubler = new Transform({
     objectMode: true,
-    transform(chunk, end, callback) {
+    transform(chunk, _end, callback) {
       const result = chunk * 2;
       callback(null, result);
     },

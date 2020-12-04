@@ -3,17 +3,22 @@ import eos from 'end-of-stream';
 import once from 'once';
 import { Substream } from './Substream';
 
-const IGNORE_SUBSTREAM: Record<string, unknown> = {};
+const IGNORE_SUBSTREAM = Symbol('IGNORE_SUBSTREAM');
+
+interface Chunk{
+  name: string;
+  data: unknown;
+}
 
 export class ObjectMultiplex extends Duplex {
 
-  private _substreams: Record<string, Substream | Record<string, any>>;
+  private _substreams: Record<string, Substream | typeof IGNORE_SUBSTREAM>;
 
-  constructor(_opts: Record<string, unknown> = {}) {
-    const opts = Object.assign({}, _opts, {
+  constructor(opts: Record<string, unknown> = {}) {
+    super({
+      ...opts,
       objectMode: true,
     });
-    super(opts);
     this._substreams = {};
   }
 
@@ -33,7 +38,7 @@ export class ObjectMultiplex extends Duplex {
 
     // listen for parent stream to end
     anyStreamEnd(this, (_error?: Error | null) => {
-      substream.destroy();
+      return substream.destroy(_error || undefined);
     });
 
     return substream;
@@ -57,7 +62,7 @@ export class ObjectMultiplex extends Duplex {
   }
 
   _write(
-    chunk: Record<string, any>,
+    chunk: Chunk,
     _encoding: BufferEncoding,
     callback: (error?: Error | null) => void,
   ): void {

@@ -8,9 +8,9 @@ export interface SubstreamOptions {
 
 export class Substream extends Duplex {
 
-  private _parent: ObjectMultiplex;
+  private readonly _parent: ObjectMultiplex;
 
-  private _name: string;
+  private readonly _name: string;
 
   constructor({ parent, name }: SubstreamOptions) {
     super({ objectMode: true });
