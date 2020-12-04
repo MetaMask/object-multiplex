@@ -13,7 +13,7 @@ workflows:
       - all-tests-pass:
           requires:
             - test-lint
-            -test-build-unit
+            - test-build-unit
 
 jobs:
   prep-deps:
