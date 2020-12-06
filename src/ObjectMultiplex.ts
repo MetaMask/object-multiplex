@@ -5,7 +5,7 @@ import { Substream } from './Substream';
 
 const IGNORE_SUBSTREAM = Symbol('IGNORE_SUBSTREAM');
 
-interface Chunk{
+interface Chunk {
   name: string;
   data: unknown;
 }
