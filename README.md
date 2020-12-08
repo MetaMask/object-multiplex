@@ -1,4 +1,4 @@
-# @metamask/obj-multiplex
+# @metamask/object-multiplex
 
 Simple stream multiplexing for `objectMode`.
 

@@ -11,4 +11,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- TypeScript typings ([#9](https://github.com/MetaMask/obj-multiplex/pull/9))
+- TypeScript typings ([#9](https://github.com/MetaMask/object-multiplex/pull/9))
