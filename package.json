@@ -1,9 +1,11 @@
 {
   "name": "obj-multiplex",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "",
   "main": "dist/index.js",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc --project .",
     "lint": "eslint . --ext ts,js,json",
