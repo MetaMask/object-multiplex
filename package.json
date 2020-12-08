@@ -1,7 +1,7 @@
 {
   "name": "@metamask/object-multiplex",
   "version": "1.1.0",
-  "description": "",
+  "description": "Simple stream multiplexing for objectMode.",
   "main": "dist/index.js",
   "files": [
     "dist"
