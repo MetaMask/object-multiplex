@@ -10,7 +10,8 @@
     "build": "tsc --project .",
     "lint": "eslint . --ext ts,js,json",
     "lint:fix": "yarn lint --fix",
-    "test": "yarn build && node test"
+    "test": "yarn build && node test",
+    "prepublishOnly": "yarn test"
   },
   "author": "",
   "license": "ISC",
