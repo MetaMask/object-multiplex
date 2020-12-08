@@ -1,5 +1,5 @@
 {
-  "name": "obj-multiplex",
+  "name": "@metamask/obj-multiplex",
   "version": "1.1.0",
   "description": "",
   "main": "dist/index.js",
