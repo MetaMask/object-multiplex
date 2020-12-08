@@ -11,7 +11,7 @@
     "lint": "eslint . --ext ts,js,json",
     "lint:fix": "yarn lint --fix",
     "test": "yarn build && node test",
-    "prepare": "yarn test"
+    "prepublishOnly": "yarn test"
   },
   "author": "",
   "license": "ISC",
