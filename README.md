@@ -1,8 +1,8 @@
-# obj-multiplex
+# @metamask/object-multiplex
 
-simple stream multiplexing for `objectMode`
+Simple stream multiplexing for `objectMode`.
 
-### usage
+## Usage
 
 ```js
 // create multiplexer
