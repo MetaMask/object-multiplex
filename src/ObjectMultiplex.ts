@@ -1,7 +1,7 @@
-import { Duplex } from 'readable-stream';
 import eos from 'end-of-stream';
 import once from 'once';
 import { Substream } from './Substream';
+import { DuplexWithDestroy } from './DuplexWithDestroy';
 
 const IGNORE_SUBSTREAM = Symbol('IGNORE_SUBSTREAM');
 
@@ -10,7 +10,7 @@ interface Chunk {
   data: unknown;
 }
 
-export class ObjectMultiplex extends Duplex {
+export class ObjectMultiplex extends DuplexWithDestroy {
 
   private _substreams: Record<string, Substream | typeof IGNORE_SUBSTREAM>;
 

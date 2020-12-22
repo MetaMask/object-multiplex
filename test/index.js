@@ -1,16 +1,13 @@
+const { PassThrough, Transform } = require('stream');
 const test = require('tape');
 const pump = require('pump');
-const { PassThrough, Transform } = require('readable-stream');
-const endOfStream = require('end-of-stream');
+const eos = require('end-of-stream');
 const ObjMultiplex = require('../dist');
 
 test('basic - string', (t) => {
   t.plan(2);
 
-  const {
-    inTransport,
-    inStream, outStream,
-  } = basicTestSetup();
+  const { inTransport, inStream, outStream } = basicTestSetup();
   bufferToEnd(outStream, (err, results) => {
     t.error(err, 'should not error');
     t.deepEqual(results, ['haay', 'wuurl'], 'results should match');
@@ -28,13 +25,14 @@ test('basic - string', (t) => {
 test('basic - obj', (t) => {
   t.plan(2);
 
-  const {
-    inTransport,
-    inStream, outStream,
-  } = basicTestSetup();
+  const { inTransport, inStream, outStream } = basicTestSetup();
   bufferToEnd(outStream, (err, results) => {
     t.error(err, 'should not error');
-    t.deepEqual(results, [{ message: 'haay' }, { message: 'wuurl' }], 'results should match');
+    t.deepEqual(
+      results,
+      [{ message: 'haay' }, { message: 'wuurl' }],
+      'results should match',
+    );
     t.end();
   });
   // pass in messages
@@ -48,10 +46,8 @@ test('basic - obj', (t) => {
 test('roundtrip', (t) => {
   t.plan(2);
 
-  const {
-    outTransport,
-    inStream, outStream,
-  } = basicTestSetup();
+  const { outTransport, inStream, outStream } = basicTestSetup();
+
   const doubler = new Transform({
     objectMode: true,
     transform(chunk, _end, callback) {
@@ -60,17 +56,14 @@ test('roundtrip', (t) => {
     },
   });
 
-  pump(
-    outStream,
-    doubler,
-    outStream,
-  );
+  pump(outStream, doubler, outStream);
 
   bufferToEnd(inStream, (err, results) => {
     t.error(err, 'should not error');
     t.deepEqual(results, [20, 24], 'results should match');
     t.end();
   });
+
   // pass in messages
   inStream.write(10);
   inStream.write(12);
@@ -82,7 +75,6 @@ test('roundtrip', (t) => {
 // util
 
 function basicTestSetup() {
-
   // setup multiplex and Transport
   const inMux = new ObjMultiplex();
   const outMux = new ObjMultiplex();
@@ -93,24 +85,20 @@ function basicTestSetup() {
   const inStream = inMux.createStream('hello');
   const outStream = outMux.createStream('hello');
 
-  pump(
-    inMux,
-    inTransport,
-    outMux,
-    outTransport,
-    inMux,
-  );
+  pump(inMux, inTransport, outMux, outTransport, inMux);
 
   return {
-    inTransport, outTransport,
-    inMux, outMux,
-    inStream, outStream,
+    inTransport,
+    outTransport,
+    inMux,
+    outMux,
+    inStream,
+    outStream,
   };
-
 }
 
 function bufferToEnd(stream, callback) {
   const results = [];
-  endOfStream(stream, (err) => callback(err, results));
+  eos(stream, { error: false }, (err) => callback(err, results));
   stream.on('data', (chunk) => results.push(chunk));
 }

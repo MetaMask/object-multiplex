@@ -1,12 +1,12 @@
-import { Duplex } from 'readable-stream';
 import { ObjectMultiplex } from './ObjectMultiplex';
+import { DuplexWithDestroy } from './DuplexWithDestroy';
 
 export interface SubstreamOptions {
   parent: ObjectMultiplex;
   name: string;
 }
 
-export class Substream extends Duplex {
+export class Substream extends DuplexWithDestroy {
 
   private readonly _parent: ObjectMultiplex;
 
