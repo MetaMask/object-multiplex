@@ -3,6 +3,9 @@
   "version": "1.1.0",
   "description": "Simple stream multiplexing for objectMode.",
   "main": "dist/index.js",
+  "engines": {
+    "node": ">=12.0.0"
+  },
   "files": [
     "dist/"
   ],

@@ -22,3 +22,9 @@ streamA.write(123)
 // or pipe together normally
 streamB.pipe(evilAiBrain).pipe(streamB)
 ```
+
+## Running tests
+
+```bash
+yarn test
+```
