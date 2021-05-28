@@ -23,6 +23,11 @@ export class ObjectMultiplex extends Duplex {
   }
 
   createStream(name: string): Substream {
+    // validate stream destroyed already
+    if (this.destroyed) {
+      throw new Error('ObjectMultiplex - parent stream already destroyed');
+    }
+
     // validate name
     if (!name) {
       throw new Error('ObjectMultiplex - name must not be empty');

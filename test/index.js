@@ -79,6 +79,17 @@ test('roundtrip', (t) => {
   setTimeout(() => outTransport.destroy(), 100);
 });
 
+test('error on createStream if destroyed', (t) => {
+  const stream = new ObjMultiplex();
+  stream.destroy();
+  try {
+    stream.createStream('controller');
+  } catch (e) {
+    t.assert(e.message.includes('already destroyed'), true);
+    t.end();
+  }
+});
+
 // util
 
 function basicTestSetup() {
