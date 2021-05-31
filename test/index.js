@@ -90,6 +90,18 @@ test('error on createStream if destroyed', (t) => {
   }
 });
 
+test('error on createStream if ended', (t) => {
+  const stream = new ObjMultiplex();
+  stream.end();
+  try {
+    stream.createStream('controller');
+    stream.write({ foo: 'bar' });
+  } catch (e) {
+    t.assert(e.message.includes('already ended'), true);
+    t.end();
+  }
+});
+
 // util
 
 function basicTestSetup() {
