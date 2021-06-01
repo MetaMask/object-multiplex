@@ -10,11 +10,12 @@
     "dist/"
   ],
   "scripts": {
-    "build": "rm -rf ./dist && tsc --project .",
+    "build:clean": "rimraf dist && yarn build",
+    "build": "tsc --project .",
     "lint": "eslint . --ext ts,js,json",
     "lint:fix": "yarn lint --fix",
     "test": "yarn build && node test",
-    "prepublishOnly": "yarn test"
+    "prepublishOnly": "yarn build:clean && yarn test"
   },
   "author": "",
   "license": "ISC",
@@ -36,6 +37,7 @@
     "eslint-plugin-json": "^2.1.2",
     "eslint-plugin-node": "^11.1.0",
     "pump": "^1.0.2",
+    "rimraf": "^3.0.2",
     "tape": "^4.8.0",
     "typescript": "^4.1.2"
   }
