@@ -25,7 +25,7 @@ export class ObjectMultiplex extends Duplex {
   createStream(name: string): Substream {
     // guard stream against destroyed already
     if (this.destroyed) {
-      throw new Error(`ObjectMultiplex - parent stream for name "${name}" already destroyed `);
+      throw new Error(`ObjectMultiplex - parent stream for name "${name}" already destroyed`);
     }
 
     // guard stream against ended already
