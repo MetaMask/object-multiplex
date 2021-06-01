@@ -24,12 +24,16 @@ export class ObjectMultiplex extends Duplex {
   createStream(name: string): Substream {
     // guard stream against destroyed already
     if (this.destroyed) {
-      throw new Error(`ObjectMultiplex - parent stream for name "${name}" already destroyed`);
+      throw new Error(
+        `ObjectMultiplex - parent stream for name "${name}" already destroyed`,
+      );
     }
 
     // guard stream against ended already
     if (this._readableState.ended || this._writableState.ended) {
-      throw new Error(`ObjectMultiplex - parent stream for name "${name}" already ended`);
+      throw new Error(
+        `ObjectMultiplex - parent stream for name "${name}" already ended`,
+      );
     }
 
     // validate name
