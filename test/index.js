@@ -95,7 +95,6 @@ test('error on createStream if ended', (t) => {
   stream.end();
   try {
     stream.createStream('controller');
-    stream.write({ foo: 'bar' });
   } catch (e) {
     t.assert(e.message.includes('already ended'), true);
     t.end();
