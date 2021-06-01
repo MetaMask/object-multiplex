@@ -3,6 +3,10 @@
   "version": "1.1.0",
   "description": "Simple stream multiplexing for objectMode.",
   "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MetaMask/object-multiplex.git"
+  },
   "engines": {
     "node": ">=12.0.0"
   },
@@ -25,6 +29,7 @@
     "readable-stream": "^2.3.3"
   },
   "devDependencies": {
+    "@metamask/auto-changelog": "^2.3.0",
     "@metamask/eslint-config": "^4.1.0",
     "@types/end-of-stream": "^1.4.0",
     "@types/node": "^14.14.9",
