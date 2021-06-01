@@ -7,7 +7,6 @@ export interface SubstreamOptions {
 }
 
 export class Substream extends Duplex {
-
   private readonly _parent: ObjectMultiplex;
 
   private readonly _name: string;

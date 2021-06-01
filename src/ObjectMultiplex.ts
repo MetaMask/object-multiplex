@@ -11,7 +11,6 @@ interface Chunk {
 }
 
 export class ObjectMultiplex extends Duplex {
-
   private _substreams: Record<string, Substream | typeof IGNORE_SUBSTREAM>;
 
   constructor(opts: Record<string, unknown> = {}) {
@@ -39,7 +38,9 @@ export class ObjectMultiplex extends Duplex {
     }
 
     if (this._substreams[name]) {
-      throw new Error(`ObjectMultiplex - Substream for name "${name}" already exists`);
+      throw new Error(
+        `ObjectMultiplex - Substream for name "${name}" already exists`,
+      );
     }
 
     // create substream
@@ -61,7 +62,9 @@ export class ObjectMultiplex extends Duplex {
       throw new Error('ObjectMultiplex - name must not be empty');
     }
     if (this._substreams[name]) {
-      throw new Error(`ObjectMultiplex - Substream for name "${name}" already exists`);
+      throw new Error(
+        `ObjectMultiplex - Substream for name "${name}" already exists`,
+      );
     }
     // set
     this._substreams[name] = IGNORE_SUBSTREAM;
@@ -76,7 +79,6 @@ export class ObjectMultiplex extends Duplex {
     _encoding: BufferEncoding,
     callback: (error?: Error | null) => void,
   ): void {
-
     const { name, data } = chunk;
 
     if (!name) {
@@ -101,7 +103,10 @@ export class ObjectMultiplex extends Duplex {
 }
 
 // util
-function anyStreamEnd(stream: ObjectMultiplex, _cb: (error?: Error | null) => void) {
+function anyStreamEnd(
+  stream: ObjectMultiplex,
+  _cb: (error?: Error | null) => void,
+) {
   const cb = once(_cb);
   eos(stream, { readable: false }, cb);
   eos(stream, { writable: false }, cb);
