@@ -1,8 +1,9 @@
 {
   "name": "@metamask/object-multiplex",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Simple stream multiplexing for objectMode.",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/MetaMask/object-multiplex.git"
