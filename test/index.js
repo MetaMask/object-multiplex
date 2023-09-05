@@ -10,6 +10,7 @@ test('basic - string', (t) => {
 
   const { inTransport, inStream, outStream } = basicTestSetup();
   bufferToEnd(outStream, (err, results) => {
+    console.log('DERP');
     t.error(err, 'should not error');
     t.deepEqual(results, ['haay', 'wuurl'], 'results should match');
     t.end();
