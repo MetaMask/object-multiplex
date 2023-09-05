@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [1.3.0]
 ### Added
 - Export TypeScript types ([#31](https://github.com/MetaMask/object-multiplex/pull/31))
 
@@ -20,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Rename package to @metamask/object-multiplex ([#12](https://github.com/MetaMask/object-multiplex/pull/12))
 
-[Unreleased]: https://github.com/MetaMask/object-multiplex/compare/v1.2.0...HEAD
+[Unreleased]: https://github.com/MetaMask/object-multiplex/compare/v1.3.0...HEAD
+[1.3.0]: https://github.com/MetaMask/object-multiplex/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/MetaMask/object-multiplex/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/MetaMask/object-multiplex/releases/tag/v1.1.0
