@@ -1,5 +1,10 @@
+const {
+  PassThrough,
+  Transform,
+  finished,
+  pipeline,
+} = require('readable-stream');
 const test = require('tape');
-const { PassThrough, Transform, finished, pipeline } = require('readable-stream');
 // eslint-disable-next-line import/no-unresolved
 const ObjMultiplex = require('../dist');
 
@@ -18,7 +23,7 @@ test('basic - string', (t) => {
   inStream.write('wuurl');
 
   // simulate disconnect
-  setTimeout(() => inTransport.destroy());
+  setImmediate(() => inTransport.end(null, () => undefined));
 });
 
 test('basic - obj', (t) => {
@@ -39,7 +44,7 @@ test('basic - obj', (t) => {
   inStream.write({ message: 'wuurl' });
 
   // simulate disconnect
-  setTimeout(() => inTransport.destroy());
+  setImmediate(() => inTransport.end(null, () => undefined));
 });
 
 test('roundtrip', (t) => {
@@ -54,7 +59,7 @@ test('roundtrip', (t) => {
     },
   });
 
-  pipeline(outStream, doubler, outStream);
+  pipeline(outStream, doubler, outStream, () => undefined);
 
   bufferToEnd(inStream, (err, results) => {
     t.error(err, 'should not error');
@@ -66,7 +71,7 @@ test('roundtrip', (t) => {
   inStream.write(12);
 
   // simulate disconnect
-  setTimeout(() => outTransport.destroy(), 100);
+  setTimeout(() => outTransport.end(), 100);
 });
 
 test('error on createStream if destroyed', (t) => {
@@ -104,7 +109,7 @@ function basicTestSetup() {
   const inStream = inMux.createStream('hello');
   const outStream = outMux.createStream('hello');
 
-  pipeline(inMux, inTransport, outMux, outTransport, inMux);
+  pipeline(inMux, inTransport, outMux, outTransport, inMux, () => undefined);
 
   return {
     inTransport,
@@ -118,6 +123,17 @@ function basicTestSetup() {
 
 function bufferToEnd(stream, callback) {
   const results = [];
-  finished(stream, (err) => callback(err, results));
-  stream.on('data', (chunk) => results.push(chunk));
+  let flushed = false;
+  function onFinish(err) {
+    if (flushed) {
+      return;
+    }
+    flushed = true;
+    callback(err, results);
+  }
+  stream.prependListener('close', onFinish);
+  finished(stream, onFinish);
+  stream.on('data', (chunk) => {
+    results.push(chunk);
+  });
 }
