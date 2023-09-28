@@ -1,7 +1,6 @@
 const test = require('tape');
 const pump = require('pump');
-const { PassThrough, Transform } = require('readable-stream');
-const endOfStream = require('end-of-stream');
+const { PassThrough, Transform, finished } = require('readable-stream');
 // eslint-disable-next-line import/no-unresolved
 const ObjMultiplex = require('../dist');
 
@@ -120,6 +119,6 @@ function basicTestSetup() {
 
 function bufferToEnd(stream, callback) {
   const results = [];
-  endOfStream(stream, (err) => callback(err, results));
+  finished(stream, (err) => callback(err, results));
   stream.on('data', (chunk) => results.push(chunk));
 }

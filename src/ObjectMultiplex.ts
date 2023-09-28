@@ -1,5 +1,4 @@
-import { Duplex } from 'readable-stream';
-import eos from 'end-of-stream';
+import { Duplex, finished } from 'readable-stream';
 import once from 'once';
 import { Substream } from './Substream';
 
@@ -112,6 +111,6 @@ function anyStreamEnd(
   _cb: (error?: Error | null) => void,
 ) {
   const cb = once(_cb);
-  eos(stream, { readable: false }, cb);
-  eos(stream, { writable: false }, cb);
+  finished(stream, { readable: false }, cb);
+  finished(stream, { writable: false }, cb);
 }
