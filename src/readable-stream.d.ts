@@ -16,5 +16,4 @@ declare module 'readable-stream' {
     options: Options,
     callback?: Callback,
   ): () => void;
-  function finished(stream: Stream, callback?: Callback): () => void;
 }
