@@ -1,6 +1,5 @@
 const test = require('tape');
-const pump = require('pump');
-const { PassThrough, Transform, finished } = require('readable-stream');
+const { PassThrough, Transform, finished, pipeline } = require('readable-stream');
 // eslint-disable-next-line import/no-unresolved
 const ObjMultiplex = require('../dist');
 
@@ -55,7 +54,7 @@ test('roundtrip', (t) => {
     },
   });
 
-  pump(outStream, doubler, outStream);
+  pipeline(outStream, doubler, outStream);
 
   bufferToEnd(inStream, (err, results) => {
     t.error(err, 'should not error');
@@ -105,7 +104,7 @@ function basicTestSetup() {
   const inStream = inMux.createStream('hello');
   const outStream = outMux.createStream('hello');
 
-  pump(inMux, inTransport, outMux, outTransport, inMux);
+  pipeline(inMux, inTransport, outMux, outTransport, inMux);
 
   return {
     inTransport,
