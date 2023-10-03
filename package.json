@@ -37,7 +37,6 @@
     "@metamask/eslint-config": "^6.0.0",
     "@metamask/eslint-config-nodejs": "^6.0.0",
     "@metamask/eslint-config-typescript": "^6.0.0",
-    "@types/end-of-stream": "^1.4.0",
     "@types/node": "^16",
     "@types/once": "^1.4.0",
     "@types/readable-stream": "4.0.0",
