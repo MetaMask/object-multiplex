@@ -1,7 +1,6 @@
 const {
   PassThrough,
   Transform,
-  finished,
   pipeline,
 } = require('readable-stream');
 const test = require('tape');
@@ -131,7 +130,7 @@ function bufferToEnd(stream, callback) {
     flushed = true;
     callback(err, results);
   }
-  finished(stream, onFinish);
+  stream.prependListener('close', onFinish);
   stream.on('data', (chunk) => {
     results.push(chunk);
   });
