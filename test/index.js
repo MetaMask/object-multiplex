@@ -1,8 +1,4 @@
-const {
-  PassThrough,
-  Transform,
-  pipeline,
-} = require('readable-stream');
+const { PassThrough, Transform, pipeline } = require('readable-stream');
 const test = require('tape');
 // eslint-disable-next-line import/no-unresolved
 const ObjMultiplex = require('../dist');
