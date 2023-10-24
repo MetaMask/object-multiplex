@@ -1,7 +1,5 @@
+const { PassThrough, Transform, pipeline } = require('readable-stream');
 const test = require('tape');
-const pump = require('pump');
-const { PassThrough, Transform } = require('readable-stream');
-const endOfStream = require('end-of-stream');
 // eslint-disable-next-line import/no-unresolved
 const ObjMultiplex = require('../dist');
 
@@ -20,7 +18,7 @@ test('basic - string', (t) => {
   inStream.write('wuurl');
 
   // simulate disconnect
-  setTimeout(() => inTransport.destroy());
+  setImmediate(() => inTransport.end(null, () => undefined));
 });
 
 test('basic - obj', (t) => {
@@ -41,7 +39,7 @@ test('basic - obj', (t) => {
   inStream.write({ message: 'wuurl' });
 
   // simulate disconnect
-  setTimeout(() => inTransport.destroy());
+  setImmediate(() => inTransport.end(null, () => undefined));
 });
 
 test('roundtrip', (t) => {
@@ -56,7 +54,7 @@ test('roundtrip', (t) => {
     },
   });
 
-  pump(outStream, doubler, outStream);
+  pipeline(outStream, doubler, outStream, () => undefined);
 
   bufferToEnd(inStream, (err, results) => {
     t.error(err, 'should not error');
@@ -68,7 +66,7 @@ test('roundtrip', (t) => {
   inStream.write(12);
 
   // simulate disconnect
-  setTimeout(() => outTransport.destroy(), 100);
+  setTimeout(() => outTransport.end(), 100);
 });
 
 test('error on createStream if destroyed', (t) => {
@@ -106,7 +104,7 @@ function basicTestSetup() {
   const inStream = inMux.createStream('hello');
   const outStream = outMux.createStream('hello');
 
-  pump(inMux, inTransport, outMux, outTransport, inMux);
+  pipeline(inMux, inTransport, outMux, outTransport, inMux, () => undefined);
 
   return {
     inTransport,
@@ -120,6 +118,18 @@ function basicTestSetup() {
 
 function bufferToEnd(stream, callback) {
   const results = [];
-  endOfStream(stream, (err) => callback(err, results));
-  stream.on('data', (chunk) => results.push(chunk));
+  let flushed = false;
+  function onFinish(err) {
+    if (flushed) {
+      return;
+    }
+    flushed = true;
+    callback(err, results);
+  }
+  // cleanup of stream should be called at end of each stream
+  // this ensures that
+  stream.prependListener('close', onFinish);
+  stream.on('data', (chunk) => {
+    results.push(chunk);
+  });
 }
