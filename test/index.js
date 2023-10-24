@@ -131,7 +131,6 @@ function bufferToEnd(stream, callback) {
     flushed = true;
     callback(err, results);
   }
-  stream.prependListener('close', onFinish);
   finished(stream, onFinish);
   stream.on('data', (chunk) => {
     results.push(chunk);
