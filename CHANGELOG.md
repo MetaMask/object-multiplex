@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.0]
+### Changed
+- **BREAKING**: Increase minimum Node.js version to 16 ([#41](https://github.com/MetaMask/object-multiplex/pull/41))
+- **BREAKING**: Bump `readable-stream` from `^2.3.3` to `3.6.2` ([#41](https://github.com/MetaMask/object-multiplex/pull/41))
+
+### Removed
+- Remove dependency `end-of-stream` ([#41](https://github.com/MetaMask/object-multiplex/pull/41))
+- Remove `stream-resolved.finished` overload in types ([#41](https://github.com/MetaMask/object-multiplex/pull/41))
+
 ## [1.3.0]
 ### Added
 - Export TypeScript types ([#31](https://github.com/MetaMask/object-multiplex/pull/31))
