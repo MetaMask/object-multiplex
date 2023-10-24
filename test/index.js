@@ -130,6 +130,8 @@ function bufferToEnd(stream, callback) {
     flushed = true;
     callback(err, results);
   }
+  // cleanup of stream should be called at end of each stream
+  // this ensures that
   stream.prependListener('close', onFinish);
   stream.on('data', (chunk) => {
     results.push(chunk);
