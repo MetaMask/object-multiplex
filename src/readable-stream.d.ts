@@ -1,4 +1,4 @@
-// import indicrectly used for module augmentation to extend @types/readable-stream with missing exports
+// import indirectly used for module augmentation to extend @types/readable-stream with missing exports
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import * as readableStream from 'readable-stream';
 
