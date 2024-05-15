@@ -1,4 +1,4 @@
-import { Duplex, finished } from 'readable-stream';
+import { Duplex, finished, type DuplexOptions } from 'readable-stream';
 import once from 'once';
 import { Substream } from './Substream';
 
@@ -12,15 +12,15 @@ interface Chunk {
 export class ObjectMultiplex extends Duplex {
   private _substreams: Record<string, Substream | typeof IGNORE_SUBSTREAM>;
 
-  constructor(opts: Record<string, unknown> = {}) {
+  constructor(opts: DuplexOptions = {}) {
     super({
-      ...opts,
       objectMode: true,
+      ...opts,
     });
     this._substreams = {};
   }
 
-  createStream(name: string): Substream {
+  createStream(name: string, opts: DuplexOptions = {}): Substream {
     // guard stream against destroyed already
     if (this.destroyed) {
       throw new Error(
@@ -47,7 +47,11 @@ export class ObjectMultiplex extends Duplex {
     }
 
     // create substream
-    const substream = new Substream({ parent: this, name });
+    const substream = new Substream({
+      name,
+      parent: this,
+      ...opts,
+    });
     this._substreams[name] = substream;
 
     // listen for parent stream to end
