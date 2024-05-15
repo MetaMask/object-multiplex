@@ -1,4 +1,4 @@
-import { Duplex, finished } from 'readable-stream';
+import { Duplex, finished, type DuplexOptions } from 'readable-stream';
 import once from 'once';
 import { Substream } from './Substream';
 
@@ -20,7 +20,7 @@ export class ObjectMultiplex extends Duplex {
     this._substreams = {};
   }
 
-  createStream(name: string): Substream {
+  createStream(name: string, opts: DuplexOptions = {}): Substream {
     // guard stream against destroyed already
     if (this.destroyed) {
       throw new Error(
@@ -47,7 +47,11 @@ export class ObjectMultiplex extends Duplex {
     }
 
     // create substream
-    const substream = new Substream({ parent: this, name });
+    const substream = new Substream({
+      name,
+      parent: this,
+      ...opts,
+    });
     this._substreams[name] = substream;
 
     // listen for parent stream to end

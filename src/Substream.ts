@@ -1,7 +1,7 @@
-import { Duplex } from 'readable-stream';
+import { Duplex, type DuplexOptions } from 'readable-stream';
 import { ObjectMultiplex } from './ObjectMultiplex';
 
-export interface SubstreamOptions {
+export interface SubstreamOptions extends DuplexOptions {
   parent: ObjectMultiplex;
   name: string;
 }
@@ -11,8 +11,11 @@ export class Substream extends Duplex {
 
   private readonly _name: string;
 
-  constructor({ parent, name }: SubstreamOptions) {
-    super({ objectMode: true });
+  constructor({ parent, name, ...streamOptions }: SubstreamOptions) {
+    super({
+      objectMode: true,
+      ...streamOptions,
+    });
     this._parent = parent;
     this._name = name;
   }
