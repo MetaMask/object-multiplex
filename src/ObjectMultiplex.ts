@@ -14,8 +14,8 @@ export class ObjectMultiplex extends Duplex {
 
   constructor(opts: DuplexOptions = {}) {
     super({
-      ...opts,
       objectMode: true,
+      ...opts,
     });
     this._substreams = {};
   }
