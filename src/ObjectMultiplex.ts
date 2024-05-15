@@ -12,7 +12,7 @@ interface Chunk {
 export class ObjectMultiplex extends Duplex {
   private _substreams: Record<string, Substream | typeof IGNORE_SUBSTREAM>;
 
-  constructor(opts: Record<string, unknown> = {}) {
+  constructor(opts: DuplexOptions = {}) {
     super({
       ...opts,
       objectMode: true,
