@@ -29,7 +29,7 @@
   "license": "ISC",
   "dependencies": {
     "once": "^1.4.0",
-    "readable-stream": "^3.6.2"
+    "readable-stream": "^4.5.2"
   },
   "devDependencies": {
     "@lavamoat/allow-scripts": "^2.5.1",
@@ -39,7 +39,7 @@
     "@metamask/eslint-config-typescript": "^6.0.0",
     "@types/node": "^16",
     "@types/once": "^1.4.0",
-    "@types/readable-stream": "4.0.0",
+    "@types/readable-stream": "^4.0.14",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
     "eslint": "^7.32.0",
