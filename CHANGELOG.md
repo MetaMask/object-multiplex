@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.0]
+### Changed
+- Allow overriding default stream constructor options in `createStream` ([#52](https://github.com/MetaMask/object-multiplex/pull/52))
+
 ## [2.0.0]
 ### Changed
 - **BREAKING**: Increase minimum Node.js version to 16 ([#41](https://github.com/MetaMask/object-multiplex/pull/41))
