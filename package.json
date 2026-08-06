@@ -28,6 +28,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/readable-stream": "4.0.0",
     "once": "^1.4.0",
     "readable-stream": "^3.6.2"
   },
@@ -39,7 +40,6 @@
     "@metamask/eslint-config-typescript": "^6.0.0",
     "@types/node": "^16",
     "@types/once": "^1.4.0",
-    "@types/readable-stream": "4.0.0",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
     "eslint": "^7.32.0",
